@@ -7,4 +7,38 @@ format: html
 library(tidyverse)
 ```
 
+```{r}
+# Ensure the tidyverse package is loaded
+library(tidyverse)
+
+# Create an interactive-feeling static visualization using the mpg dataset
+ggplot(data = mpg, aes(x = displ, y = hwy, color = class)) +
+  # Add points with some jitter and transparency to reduce overlapping
+  geom_jitter(size = 3, alpha = 0.7, width = 0.1, height = 0.1) +
+  # Add a smooth trend line to show the overall relationship
+  geom_smooth(aes(group = 1), method = "loess", color = "gray30", se = FALSE, linetype = "dashed") +
+  # Apply a clean, modern minimal theme
+  theme_minimal(base_size = 14) +
+  # Customize colors using a distinct palette
+  scale_color_viridis_d(option = "plasma") +
+  # Add clear, descriptive labels
+  labs(
+    title = "Engine Displacement vs. Highway Fuel Efficiency",
+    subtitle = "Larger engines generally yield lower MPG, varying significantly by vehicle class",
+    x = "Engine Displacement (Liters)",
+    y = "Highway Miles per Gallon (MPG)",
+    color = "Vehicle Class",
+    caption = "Data Source: EPA (mpg dataset)"
+  ) +
+  # Fine-tune theme details for presentation
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(color = "gray40", margin = margin(b = 15)),
+    legend.position = "right",
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+
 
